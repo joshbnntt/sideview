@@ -23,6 +23,8 @@ Route.group('version1', function () {
       const current_hour = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}` 
       response.send(`Time: ${current_hour}`)
   })
+  Route.post('/contact', 'ContactController.contact')
+  
 }).prefix('/api/v1')
 
 Route.any('*', 'WebAppController.render')

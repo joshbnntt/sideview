@@ -8,6 +8,7 @@
     {% if isProd %}<link rel="stylesheet" href="{{ files.css }}">{% endif %}
   </head>
   <body>
+    {{ csrfField }}
     {% if context.initialState %}
     <script type="text/javascript">window.__INITIAL_STATE__={{ serialize(context.initialState, { isJSON: true }) | safe }}</script>
     {% endif %}

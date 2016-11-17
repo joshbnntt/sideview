@@ -1,15 +1,18 @@
 <template>
   <div>
-    <h1>Home Page</h1>
+    <h1>Contact Me</h1>
+    <Contact> </Contact>
   </div>
 </template>
 
 <script>
 import Hello from '../components/Hello.vue';
+import Contact from '../components/Contact.vue';
 
 export default {
   components: {
-    Hello
+    Hello,
+    Contact
   },
 };
 </script>
