@@ -10,10 +10,10 @@ import Hello from '../components/Hello.vue';
 import Contact from '../components/Contact.vue';
 
 export default {
-  components: {
-    Hello,
-    Contact
-  },
+    components: {
+        Hello,
+        Contact
+    },
 };
 </script>
 

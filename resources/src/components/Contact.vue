@@ -1,6 +1,12 @@
 <template>
   <div class="contact">
+      <div v-show='returned'>
+          {{returned}}
+      </div>
     <form id="contact-form" v-on:submit.prevent="submit">
+        <div class="field">
+            <input type="text" v-model="company" hidden>
+        </div>
         <div class="field">
             <label>Name:</label>
             <input type="text" v-model="name" required minlength="3">
@@ -24,33 +30,43 @@
 import axios from 'axios'
 
 export default {
-  data() {
-    return {
-      name: '',
-      email: '',
-      message: '',
-    };
-  },
-
-  methods: {
-      submit(e) {
-            axios.post('/api/v1/contact', {
-                    name:this.name,
-                    email:this.email,
-                    message:this.message,
-                    _csrf:document.querySelector('input[name=_crsf]').value
-                })
-                .then((response) => {
-                    console.log(response)
-                    this.name = ''
-                    this.email = ''
-                    this.message = ''
-                })
-                .catch((error) => {
-                    console.log(error)
-                })
-      }
-  }
+    data() {
+        return {
+            name: '',
+            email: '',
+            message: '',
+            token: '',
+            company: '',
+            returned: ''
+        };
+    },
+    mounted() {
+        this.token = document.querySelector('#_token').getAttribute('value')
+        axios.defaults.headers.common['CSRF-TOKEN'] = this.token
+    },
+    methods: {
+        submit(e) {
+            if(this.company === '') {
+                axios.post('/api/v1/contact', {
+                        name:this.name,
+                        email:this.email,
+                        message:this.message
+                    })
+                    .then((response) => {
+                        this.returned = response.data
+                        this.name = ''
+                        this.email = ''
+                        this.message = ''
+                    })
+                    .catch((error) => {
+                        this.returned = error
+                        console.log(error)
+                    })
+            } else {
+                this.returned = 'Failed'
+            }
+        }
+    }
 };
 </script>
 

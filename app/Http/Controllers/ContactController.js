@@ -10,11 +10,12 @@ class ContactController {
         try {
             yield Mail.send('emails.contact', contactData, (message) => {
                 message.to(Env.get('MY_EMAIL'))
-                message.from(contactData.email, contactData.name)
                 message.subject(`Website Contact - ${contactData.name}`)
             })
+            response.status(200).send('success')
         }
         catch(e) {
+            console.log(e)
             response.status(500).send(e)
         }
     }
