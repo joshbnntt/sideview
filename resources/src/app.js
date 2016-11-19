@@ -4,15 +4,12 @@ import Vue from 'vue'
 import store from './store'
 import router from './router'
 import { sync } from 'vuex-router-sync'
-import ElementUI from 'element-ui'
 
 // sync the router with the vuex store.
 // this registers `store.state.route`
 sync(store, router)
 
 import App from './App.vue'
-
-Vue.use(ElementUI)
 
 // create the app instance.
 // here we inject the router and store to all child components,
