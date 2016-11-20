@@ -1,17 +1,17 @@
 <template>
   <div>
-    <h1>Contact Me</h1>
+    <div class="home-heading">
+      <h1>Contact Me</h1>
+    </div>
     <Contact> </Contact>
   </div>
 </template>
 
 <script>
-import Hello from '../components/Hello.vue';
 import Contact from '../components/Contact.vue';
 
 export default {
     components: {
-        Hello,
         Contact
     },
 };
@@ -21,5 +21,9 @@ export default {
 .logo {
   width: 450px;
   height: 173px
+}
+.home-heading: {
+  display:flex;
+  justify-content:center;
 }
 </style>

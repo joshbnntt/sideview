@@ -1,24 +1,33 @@
 <template>
-  <div class="contact">
+  <div class="container">
       <div v-show='returned'>
-          <span class="md-error">{{returned}}</span>
+          <span class="error">{{returned}}</span>
       </div>
     <form ref="form" @submit.stop.prevent="submit"  label-width="120px">
-        <md-input-container>
-            <md-input type="text" v-model="company" hidden></md-input>
-        </md-input-container>    
-        <md-input-container label="Name">
-            <md-input type="text" v-model="name" required minlength="3"></md-input>
-        </md-input-container>
-        <md-input-container label="Email" >
-            <md-input type="email" v-model="email" required></md-input>
-        </md-input-container>
-        <md-input-container label="Message">
-            <md-textarea v-model="message" required></md-textarea>
-        </md-input-container>
-        <md-input-container >
-            <md-button type="primary">Submit</md-button>
-        </md-input-container>
+        <div class='row'>
+            <input type="text" v-model="company" hidden></input>
+        </div>    
+        <div class='row'>
+            <label for="contact-name">
+                Name
+                <input name='contact-name' id='contact-name' type="text" v-model="name" required minlength="3"></input>
+            </label>
+        </div>
+        <div class='row'>
+            <label for="contact-email">
+                Email
+                <input name='contact-email' id='contact-email' type="email" v-model="email" required></input>
+            </label>
+        </div>
+        <div class='row'>
+            <label for="contact-message">
+                Message
+                <textarea name='contact-message' id='contact-message' class="materialize-textarea" v-model="message" required></textarea>
+            </label>
+        </div>
+        <div class='row'>
+            <button class="btn" type="primary">Submit</button>
+        </div>
     </form>
   </div>
 </template>
@@ -27,6 +36,8 @@
 import axios from 'axios'
 
 export default {
+    component: {
+    },
     data() {
         return {
             company: '',
@@ -34,17 +45,7 @@ export default {
             name: '',
             email: '',
             message: '',
-            token: '',
-            rules: {
-                name: [
-                    { required: true, message: 'Please give your name', trigger: 'blur' },
-                    { min: 3, max: 5, message: 'Length should be 3 to 5', trigger: 'blur' }
-                ],
-                email: [
-                    { required: true, message: 'Please give your email', trigger: 'blur' },
-                ]
-            }
-            
+            token: ''            
         }
     },
     mounted() {
@@ -53,7 +54,9 @@ export default {
     },
     methods: {
         handleReset() {
-            this.$refs.Form.resetFields()
+            this.name = ''
+            this.email = ''
+            this.message = ''
         },
         submit(e) {
             if(this.company === '') {
@@ -83,5 +86,10 @@ export default {
 <style scoped>
 h1 {
   color: #42b983;
+}
+.contact {
+    display:flex;
+    justify-content:center;
+    width:100vw;
 }
 </style>
